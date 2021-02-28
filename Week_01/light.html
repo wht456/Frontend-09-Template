@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>红绿灯</title>
+  <style>
+    .circle {
+      background: #ccc;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-right: 20px;
+      display: inline-block;
+    }
+
+    .circle.green {
+      background: green;
+    }
+
+    .circle.yellow {
+      background: yellow;
+    }
+
+    .circle.red {
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="light-wrap">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+  <script>
+    function clear() {
+      const lights = Array.from(document.querySelectorAll('.circle'))
+      lights.forEach(item => {
+        item.classList = []
+        item.classList.add('circle')
+      })
+    }
+    function green() {
+      clear()
+      const light1 = document.querySelectorAll('.circle')[0]
+      light1.classList.add('green')
+    }
+    function yellow() {
+      clear()
+      const light2 = document.querySelectorAll('.circle')[1]
+      light2.classList.add('yellow')
+    }
+    function red() {
+      clear()
+      const light3 = document.querySelectorAll('.circle')[2]
+      light3.classList.add('red')
+    }
+    function sleep(time) {
+      return new Promise((resolve, reject) => {
+        setTimeout(resolve, time)
+      })
+    }
+    async function run() {
+      while (true) {
+        green()
+        await sleep(2000)
+        yellow()
+        await sleep(1000)
+        red()
+        await sleep(3000)
+      }
+    }
+  </script>
+</body>
+
+</html>
